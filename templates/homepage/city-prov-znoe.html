@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>16</title>
+    <style>
+        select {
+            border: 1px solid #c9c9c9;
+            background-color: #fff;
+            color: #666;
+            height: 28px;
+            line-height: 28px;
+            padding: 4px 6px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+        #detail_addr{
+            height: 26px;
+            width: 400px;
+            font-size: 20px;
+        }
+        .prov_con{
+            height: 100px;
+            width: 600px;
+            margin: 20px auto;
+            border: #2aabd2 1px double;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $.get('/get_zone/' + '0', function (data) {
+                if (data.code == 1) {
+                    step = data.zones.length
+                    for (var i = 1; i < step; ++i) {
+                        var $temp = $('<option></option>')
+                        $temp.val(String(data.zones[i].id));
+                        $temp.text(String(data.zones[i].name));
+                        $temp.appendTo($('#one'))
+                    }
+                }
+            });
+
+            $('#one').change(function () {
+                $('#two').empty().append($('<option value="">请选择城市</option>'));
+
+                $('#three').empty().append($('<option value="">请选择区</option>'));
+                $.get('/get_zone/' + $('#one').val(), function (data) {
+                    if (data.code == 1) {
+                        step = data.zones.length
+                        for (var i = 0; i < step; ++i) {
+                            var $temp = $('<option></option>')
+                            $temp.val(String(data.zones[i].id));
+                            $temp.text(String(data.zones[i].name));
+                            $temp.appendTo($('#two'))
+                        }
+                    }
+                });
+            });
+            $('#two').change(function () {
+                $('#three').empty();
+                $.get('/get_zone/' + $('#two').val(), function (data) {
+                    if (data.code == 0) {
+                        $('.zone_con').fadeOut()
+                    }
+                    if (data.code == 1) {
+                        step = data.zones.length
+                        for (var i = 0; i < step; ++i) {
+                            var $temp = $('<option></option>');
+                            $temp.val(String(data.zones[i].id));
+                            $temp.text(String(data.zones[i].name));
+                            $temp.appendTo($('#three'))
+                        }
+                    }
+                });
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div class="prov_con">
+    <label for="one">prov</label>
+    <select id="one">
+        <option value="">请选择省份</option>
+    </select>
+    <label for="two">city</label>
+    <select id="two">
+        <option value="">请选择城市</option>
+    </select>
+    <span class="zone_con">
+        <label for="three">city</label>
+        <select id="three">
+            <option value="">请选择城市</option>
+        </select>
+    </span>
+    <hr/>
+    <div class="detail_add_con">
+        <label for="detail_addr">Detail Addr</label>
+        <input type="text" id="detail_addr" placeholder="detail addr">
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index Page</title>
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/swiper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/swiper.min.css">
+    <script>
+        $(function () {
+            var $name = $.cookie("name");
+
+            if ($name != null) {
+                $('.login_info_off').hide();
+                $('.login_info_on').show();
+                $('#login_name').text($name)
+            } else {
+                $('.login_info_off').show();
+                $('.login_info_on').hide();
+            }
+
+        })
+    </script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        $(function () {
+            var swiper = new Swiper('.swiper-container', {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+        });
+
+    </script>
+
+    <!-- Demo styles -->
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .searcher_sub {
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!-- header  -->
+<div class="header_con">
+    <div class="header">
+        <div class="wellcome fl">Welcome To Everyday book</div>
+
+        <div class="user_con fr">
+            <div class="login_info_con">
+                <ul class="login_info_off">
+                    <li><a href="/login">Login</a></li>
+                    <li><span>|</span></li>
+                    <li><a href="/register">Register</a></li>
+                </ul>
+                <ul class="login_info_on">
+                    <li><a>Welcome</a></li>
+                    <li><span>:</span></li>
+                    <li><a href="/user" style="color: orange;"><em id="login_name"></em></a></li>
+                    <li><span>|</span></li>
+                    <li><a href="/orders">Orders</a></li>
+                    <li><span>|</span></li>
+                    <li><a href="/user_exit">Exit Login</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  logo searcher Cart -->
+<div class="LogoSearCart_con">
+    <a href="#" class="logo fl"> <img src="/static/img/index/logo.png" title="jiujue"> </a>
+    <div class="searcher_con fl">
+        <form action="/search">
+            <input type="text" placeholder="Searcher" autocomplete="off" name="searchwd" class="searcher fl"
+                   style="height: 38px;">
+            <input type="submit" class="searcher_sub fl" style="width: 98px;
+            height: 39px;" value="Search">
+        </form>
+    </div>
+
+    <div class=" fr">
+        <img src="/static/img/index/qqcy.gif" alt="head-img" style="margin: 13px auto;" title="jiujue is mmp">
+
+    </div>
+</div>
+<!-- center_01 -->
+<div class="center_01">
+    <div class="center_01_h1_con">
+        <h1 class="fl">All Goods Classify</h1>
+        <ul class="fl">
+            <li class="fl"><a href="#">Daily Sentence : &nbsp;</a></li>
+            <li class="fl"><a>nihao</a></li>
+        </ul>
+    </div>
+</div>
+<!-- center_02 -->
+<div class="center_02_con">
+    <ul class="center_02_left fl">
+        <li class="icon_01"><a href="/search?searchwd=Excellent">Excellent Books</a></li>
+        <li class="icon_02"><a href="/search?searchwd=Reference">Reference book</a></li>
+        <li class="icon_03"><a href="/search?searchwd=Primer">Primer book</a></li>
+        <li class="icon_04"><a href="/search?searchwd=Magazine">Magazine</a></li>
+        <li class="icon_05"><a href="/search?searchwd=Encyclopedia">Encyclopedia</a></li>
+        <li class="icon_06"><a href="/search?searchwd=Classic">Classic Books</a></li>
+    </ul>
+    <div class="center_02_center_con fl">
+
+
+        <div class="swiper-container">
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide"><a href="#"><img class="fl" src="/static/img/index/slider-01.png"
+                                                          alt="PublicityPicture"></a></li>
+                <li class="swiper-slide"><a href="#"><img class="fl" src="/static/img/index/slider-02.png"
+                                                          alt="PublicityPicture"></a></li>
+                <li class="swiper-slide"><a href="#"><img class="fl" src="/static/img/index/slider-03.png"
+                                                          alt="PublicityPicture"></a></li>
+                <li class="swiper-slide"><a href="#"><img class="fl" src="/static/img/index/slider-04.png"
+                                                          alt="PublicityPicture"></a></li>
+                <li class="swiper-slide"><a href="#"><img class="fl" src="/static/img/index/slider-05.png"
+                                                          alt="PublicityPicture"></a></li>
+                <li class="swiper-slide"><a href="#"><img class="fl" src="/static/img/index/slider-06.png"
+                                                          alt="PublicityPicture"></a></li>
+
+            </ul>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <div class="slide_ico_left"><a href="#"></a></div>
+        <div class="slide_ico_right"><a href="#"></a></div>
+    </div>
+    <ul class="center_02_right fl" style="margin-left: 1px;border-left: green solid 1px;">
+        <a href="/detail/3"><img src="/static/img/index/adv-01.svg" alt=""></a>
+        <a href="/detail/3"><img src="/static/img/index/adv-02.svg" alt=""></a>
+    </ul>
+</div>
+<!-- common module01-->
+<div class="common_module01">
+    <div class="common_module01_head_con">
+        <h2 class="common_module01_head_title fl">Excellent Books</h2>
+        <h2 class="common_module01_head_title_more fr"><a href="/search/2">More >></a></h2>
+    </div>
+    <div class="common_module01_content_con">
+        <div class="common_module01_content_banner fl">
+            <span><img src="/static/img/index/banner-01.png" alt="banner"></span>
+        </div>
+        <div class="common_module01_content_goods fl">
+            <div class="common_module01_content_goods01 fl">
+                <h3>Autobiography</h3>
+                <a style="margin-left: 55px" href="/detail/1"><img src="/static/img/index/books_of_sample.svg"
+                                                                   alt="goods"></a>
+                <p>￥ 58</p>
+            </div>
+            <div class="common_module01_content_goods01 fl">
+                <h3>Autobiography</h3>
+                <a style="margin-left: 50px" href="/detail/1"><img src="/static/img/index/books_of_sample.svg"
+                                                                   alt="goods"></a>
+                <p>￥ 58</p>
+            </div>
+            <div class="common_module01_content_goods01 fl">
+                <h3>Autobiography</h3>
+                <a style="margin-left: 50px" href="/detail/1"><img src="/static/img/index/books_of_sample.svg"
+                                                                   alt="goods"></a>
+                <p>￥ 58</p>
+            </div>
+            <div class="common_module01_content_goods01 fl">
+                <h3>Autobiography</h3>
+                <a style="margin-left: 50px" href="/detail/1"><img src="/static/img/index/books_of_sample.svg"
+                                                                   alt="goods"></a>
+                <p>￥ 58</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- foots -->
+<div class="foots">
+    <p><a href="https://github.com/jiujue">About me</a> <span>| </span>
+        <a href="#">Email : jiujueismmp@qq.com</a> <span>| </span>
+        <a href="https://github.com/jiujue">My Github</a><span>| </span>
+        <a href="https://www.cnblogs.com/jiujue/">My Cnblogs</a>
+    </p>
+    <p>CopyRight © 9012 JiuJueIsMmp All Rights Reserved</p>
+    <p>tel：888-888888</p>
+</div>
+<div class="gotoTop">
+    <a href="#">Top</a>
+</div>
+
+</body>
+</html>

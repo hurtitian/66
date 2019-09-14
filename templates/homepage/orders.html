@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Orders Page</title>
+    <script src="/static/js/jquery-2.1.0.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/jquery-ui-1.12.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
+    <script src="/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <script>
+        $(function () {
+
+            var $name = $.cookie("name");
+            $('.daggeable').draggable({
+                axis: "both",
+                containment: "parent",
+                opacity: 0.8,
+            });
+
+            if ($name != null) {
+                $('.login_info_off').hide();
+                $('.login_info_on').show();
+                $('#login_name').text($name);
+                $('.head_right_name').text($name);
+
+            } else {
+                $('.login_info_off').show();
+                $('.login_info_on').hide();
+            }
+        })
+
+    </script>
+
+    <style>
+
+        .head_con_wrapper {
+            width: 1200px;
+            height: 380px;
+            border-bottom: gainsboro solid 1px;
+            margin: 20px auto;
+
+        }
+
+        .head_con {
+            width: 1200px;
+            position: relative;
+
+        }
+
+        .jumo_con {
+            width: 800px;
+            position: absolute;
+            left: 1px;
+            right: 1px;
+        }
+
+        .bg {
+            background-image: url("/static/img/orders/jumo_bg_01.jpg");
+
+            height: 360px;
+            width: 840px;
+        }
+
+        .bg-blur {
+            float: left;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-filter: blur(4px);
+            -moz-filter: blur(4px);
+            -o-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+
+        }
+
+        .jumo_title {
+            float: right;
+            font-size: 100px;
+            margin-top: 110px;
+            margin-right: 20px;
+            color: deepskyblue;
+        }
+
+        .jumo_deputy_title {
+            float: right;
+            font-size: 36px;
+            margin-right: 20px;
+            color: deepskyblue;
+
+        }
+
+        .head_right {
+            float: right;
+            height: 350px;
+            width: 330px;
+            margin: 10px auto;
+
+
+        }
+
+        .head_right_wellcome_word_con {
+            font-size: 49px;
+
+        }
+
+        .order_con {
+            width: 1200px;
+            margin: 20px auto;
+        }
+
+        .order_data {
+            float: right;
+        }
+
+        .order_content {
+            text-indent: 26px;
+        }
+
+        .mmp {
+            margin-top: 40px;
+            height: 200px;
+            width: 300px;
+            background: url("/static/img/orders/welcome_bg_01.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-filter: blur(4px);
+            -moz-filter: blur(4px);
+            -o-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+        }
+
+        hr {
+            margin-top: 4px;
+            margin-bottom: 4px;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="header_con">
+    <div class="header">
+        <div class="wellcome fl">Welcome To Everyday book</div>
+
+        <div class="user_con fr">
+            <div class="login_info_con">
+                <ul class="login_info_off">
+                    <li><a href="/login">Login</a></li>
+                    <li><span>|</span></li>
+                    <li><a href="/register">Register</a></li>
+                </ul>
+                <ul class="login_info_on">
+                    <li><a>Welcome</a></li>
+                    <li><span>:</span></li>
+                    <li><a href="/user" style="color: orange;"><em id="login_name"></em></a></li>
+                </ul>
+
+            </div>
+            <div class="CartAndOrder_info_con">
+                <ul class="artAndOrder_info">
+                    <li><span>|</span></li>
+                    {#                    <li><a href="#">Cart</a></li>#}
+                    {#                    <li><span>|</span></li>#}
+                    <li><a href="/index">Index</a></li>
+                    <li><span>|</span></li>
+                    <li><a href="/user_exit">Exit Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>{{ bookid }}</h1>
+<div class="head_con_wrapper">
+    <div class="head_con">
+
+        <div class="jumo_con head_left">
+            <div class="jumbotron bg bg-blur">
+                <span class="jumo_title">Just Buy it!</span>
+                <span class="jumo_deputy_title">I Have a Dream by jiujue, Jr. </span>
+            </div>
+        </div>
+
+        <div class="panel panel-default head_right">
+            <div class="panel-body daggeable">
+                <div class="mmp"></div>
+                <div class="head_right_wellcome_word_con">
+                    <span>Hello,</span><span class="head_right_name"></span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="order_con">
+    <ul>
+        {% for order in orders %}
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <em class="user_name">UserName :</em>
+                        <span class="order_user">{{ order.username }}</span>
+                        <hr/>
+                        <span class="order_id"> <em class="order_id_label"> Order Id: </em>{{ order.id }}</span>
+                        <hr/>
+                        <span class="order_id"> <em
+                                class="order_id_label"> Express No: </em>{{ order.express_no }}</span>
+                        <hr/>
+                        <span class="order_detail_of_book_name"> <em
+                                class="order_detail_label">Book Name : {{ order.bookname }} </em></span>
+                        <hr/>
+                        <span class="order_price"> <em
+                                class="order_price_label">Order Price : </em>￥ {{ order.book_price }}</span>
+                        <hr/>
+                        <span class="order_recv_addr"> <em
+                                class="order_recv_addr_label">Order Recv Addr : </em>{{ order.recv_addr }}</span>
+                        <hr/>
+                        <span class="order_data"><em>Purchasing Date : </em>{{ order.createdata }}</span>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <h1> here is empty,but you can buy something.</h1>
+            <h3><a href="/index">Go to Index Page</a></h3>
+        {% endfor %}
+
+
+    </ul>
+
+
+</div>
+
+
+<!-- footer -->
+
+<div class="foots">
+    <p><a href="https://github.com/jiujue">About me</a> <span>| </span>
+        <a href="#">Email : jiujueismmp@qq.com</a> <span>| </span>
+        <a href="https://github.com/jiujue">My Github</a><span>| </span>
+        <a href="https://www.cnblogs.com/jiujue/">My Cnblogs</a>
+    </p>
+    <p>CopyRight © 9012 JiuJueIsMmp All Rights Reserved</p>
+    <p>tel：888-888888</p>
+</div>
+<div class="gotoTop">
+    <a href="#" style="text-decoration: none">Top</a>
+</div>
+
+
+</body>
+</html>
