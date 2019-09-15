@@ -37,7 +37,7 @@ class Recommend(models.Model):
     createdata = models.DateTimeField(auto_now_add=True)
 
     # like csv
-    word_list = models.DateTimeField(max_length=256)
+    word_list = models.TextField(max_length=256)
 
 class BookInfo(models.Model):
 
@@ -84,7 +84,7 @@ class Order(models.Model):
 class China(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=40, blank=True, null=True)
-    pid = models.ForeignKey('self', models.DO_NOTHING, db_column='pid', blank=True, null=True)
+    pid = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = True

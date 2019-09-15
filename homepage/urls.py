@@ -30,6 +30,7 @@ urlpatterns = [
     re_path(r'^test$',views.test),
     re_path(r'^set_recv_addr$',views.set_recv_addr),
     re_path(r'^confirm_order$',views.confirm_order),
+    re_path(r'^send$',views.send),
 
     re_path(r'^favicon\.ico$', RedirectView.as_view(url=r'/static/img/favicon.ico')),
 ]

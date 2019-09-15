@@ -16,18 +16,38 @@
             var $name = $.cookie("name");
             var $nameid = $.cookie("nameid");
 
+
             $('.op_add_or_buy_op_buy').click(function () {
                 var $bookid = $('.bookid').text();
-                $.post('/confirm_order', {
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    bookid:$bookid,
-                }, function (data) {
-                    console.log(data)
-                    if(data.code ==1){
+
+                $.ajax({
+                    url: '/confirm_order',
+                    type: "POST",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        bookid: $bookid,
+                    },
+                    timeout: 200,
+                    dataType: "json",
+                    success: function (data) {
+                        //var msgJson = eval(data); dataType为json，就不用转了
+                        if (data.code == 1) {
+                            alert('Success');
+                            location.href = '/orders';
+                        }
+                    },
+                    error: function () {
                         alert('Success');
                         location.href = '/orders';
                     }
                 });
+
+                /*$.post('/confirm_order', {
+                    csrfmiddlewaretoken: '',
+                    bookid: $bookid,
+                }, function (data) {
+                    console.log(data)
+                });*/
             });
 
             if ($name != null) {
@@ -38,6 +58,7 @@
                 $('.login_info_off').show();
                 $('.login_info_on').hide();
             }
+
 
             $.post('/have_recv_addr', {
                 csrfmiddlewaretoken: '{{ csrf_token }}',
@@ -237,7 +258,7 @@
             <div class="stock_con">
                 <hr/>
                 <label for="book_stock">Stock : </label>
-                <em  id="book_stock">{{ book.stock }}</em>
+                <em id="book_stock">{{ book.stock }}</em>
             </div>
             <div class="recv_addr_con">
                 <hr/>

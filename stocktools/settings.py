@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+DB_PASSWD = '111111'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -81,7 +83,7 @@ DATABASES = {
         'PORT': 3306,
         'USER': 'root',
         'HOST': 'localhost',
-        'PASSWORD': '111111'
+        'PASSWORD': DB_PASSWD,
 
     }
 }
@@ -124,6 +126,10 @@ STATIC_URL = '/static/'
 
 # myself addition
 
+MY_DOMAIN = '127.0.0.1'
+
+
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/upload/'  # 这个是在浏览器上访问该上传文件的url的前缀
 
@@ -133,3 +139,14 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "statics"),
     os.path.join(BASE_DIR, 'static'),
 )
+
+# send email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+#发送邮件的邮箱
+EMAIL_HOST_USER = 'jiujueismmp@163.com'
+#在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = 'a123123a'
+#收件人看到的发件人
+EMAIL_FROM = 'StockHub-Admin<jiujueismmp@163.com>'
