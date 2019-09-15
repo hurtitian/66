@@ -1,2 +1,2 @@
 # db_homework_design
-#nothing just a homework for db.
+# nothing just a homework for db.
