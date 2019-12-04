@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-DB_PASSWD = '111111'
+DB_HOST = '47.103.119.232'
+DB_PASSWD = 'jiujue.top'
+DB_DBNAME = 'stockhub'
+# DB_PASSWD = '111111'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_!282z^@#5o@p%z%we&k)6h92mnvn119wz+6c0$gaq)3%))6ka'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
 ALLOWED_HOSTS = ['*',]
 
@@ -79,10 +82,10 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'StockHub',
+        'NAME': DB_DBNAME,
         'PORT': 3306,
         'USER': 'root',
-        'HOST': 'localhost',
+        'HOST': DB_HOST, 
         'PASSWORD': DB_PASSWD,
 
     }
@@ -150,3 +153,8 @@ EMAIL_HOST_USER = 'jiujueismmp@163.com'
 EMAIL_HOST_PASSWORD = 'a123123a'
 #收件人看到的发件人
 EMAIL_FROM = 'StockHub-Admin<jiujueismmp@163.com>'
+
+
+
+# static files dir
+STATIC_ROOT='/root/db_homework_design/site-static-files-all'

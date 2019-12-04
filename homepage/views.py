@@ -186,7 +186,7 @@ def probe(request):
 @AUTH
 def comment(request):
     try:
-        comments = Comment.objects.all()
+        comments = Comment.objects.all().order_by('-createdata')
         for comment in comments:
             comment.nickname = comment.user_id.nickname
 
@@ -262,11 +262,12 @@ def confirm_order(request):
             order.express_no = temp
 
             reset_recommend(request,[order.book_id,],)
-
+            book.stock -= 1
+    
+            order.save()
+            book.save()
+               
             if 1 == send(order):
-                book.stock -= 1
-                order.save()
-                book.save()
                 return JsonResponse({'code': 1})
             else:
                 del order
@@ -282,7 +283,7 @@ def confirm_order(request):
 def orders(request):
     # create order
     user = UserInfo.objects.get(id=request.COOKIES['nameid'])
-    orders = user.order_set.all()
+    orders = user.order_set.all().order_by('-createdata')
 
     context_data = []
 
@@ -408,6 +409,7 @@ def test(request):
 
 
 def send(order):
+    return 1
     msg = """<ul style="list-style: none;background-color: #e2e9e7;padding-left: 0;margin: 20px auto;width: 600px;height: 160px">
                 <hr style="margin-top: 4px;margin-bottom: 4px"/>
                 <li>{book_name}</li>
@@ -512,6 +514,8 @@ def send(order):
 
 
 def send_recommend(userid):
+    return 1
+
     user = UserInfo.objects.get(id=userid)
     try:
         word = str(user.recommend_set.get().word_list).split(',')[0]
